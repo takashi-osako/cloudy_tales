@@ -4,8 +4,8 @@ Created on Apr 7, 2013
 @author: dorisip
 '''
 import unittest
-from sunny_tales.database.connection import DbConnection
-from sunny_tales.database.tests.unittest_db_helper import create_in_memory_db_client
+from cloudy_tales.database.connection import DbConnection
+from cloudy_tales.database.tests.unittest_db_helper import create_in_memory_db_client
 
 
 class TestConnection(unittest.TestCase):

@@ -4,10 +4,10 @@ Created on Apr 9, 2013
 @author: dorisip
 '''
 import unittest
-from sunny_tales.database.tests.unittest_db_helper import create_in_memory_db_client
-from sunny_tales.database.collections.base import BaseCollection
+from cloudy_tales.database.tests.unittest_db_helper import create_in_memory_db_client
+from cloudy_tales.database.collections.base import BaseCollection
 from zope import component
-from sunny_tales.database.client import IDbClient
+from cloudy_tales.database.client import IDbClient
 
 
 class TestBaseCollection(unittest.TestCase):
