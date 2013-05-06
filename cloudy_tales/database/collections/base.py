@@ -3,7 +3,6 @@ Created on Apr 7, 2013
 
 @author: dorisip
 '''
-from cloudy_tales.database.connection import DbConnection
 
 
 class BaseCollection(object):
@@ -11,51 +10,42 @@ class BaseCollection(object):
     Base database collection class
     '''
 
-    def __init__(self, name):
-        self.__name = name
+    def __init__(self, mongoOperationManager, name):
+        self.__mongoOperationManager = mongoOperationManager
+        self.__collection_name = name
 
     def insert(self, *args, **kwargs):
-        with DbConnection(self.__name) as conn:
-            doc_id = conn.insert(*args, **kwargs)
+            doc_id = self.__mongoOperationManager.insert(self.__collection_name, *args, **kwargs)
             # TODO: error check?
             return {'_id': doc_id}
 
     def remove_by_id(self, doc_id, *args, **kwargs):
-        with DbConnection(self.__name) as conn:
-            return conn.remove({'_id': doc_id}, *args, **kwargs)
+        return self.__mongoOperationManager.remove(self.__collection_name, {'_id': doc_id}, *args, **kwargs)
 
     def remove(self, *args, **kwargs):
-        with DbConnection(self.__name) as conn:
-            return conn.remove(*args, **kwargs)
+        return self.__mongoOperationManager.remove(self.__collection_name,*args, **kwargs)
 
     def update_by_id(self, doc_id, doc, upsert=True, *args, **kwargs):
-        with DbConnection(self.__name) as conn:
-            result = conn.update({'_id': doc_id}, {'$set': doc}, upsert=upsert, *args, **kwargs)
-            if result and result['ok']:
-                return {'_id': doc_id}
-            else:
-                return None
+        result = self.__mongoOperationManager.update(self.__collection_name, {'_id': doc_id}, {'$set': doc}, upsert=upsert, *args, **kwargs)
+        if result and result['ok']:
+            return {'_id': doc_id}
+        else:
+            return None
 
     def update(self, *args, **kwargs):
-        with DbConnection(self.__name) as conn:
-            return conn.update(*args, **kwargs)
+        return self.__mongoOperationManager.update(self.__collection_name, *args, **kwargs)
 
     def find_by_id(self, doc_id, *args, **kwargs):
-        with DbConnection(self.__name) as conn:
-            return conn.find_one({'_id': doc_id}, *args, **kwargs)
+        return self.__mongoOperationManager.find_one(self.__collection_name, {'_id': doc_id}, *args, **kwargs)
 
     def find(self, *args, **kwargs):
-        with DbConnection(self.__name) as conn:
-            return conn.find(*args, **kwargs)
+        return self.__mongoOperationManager.find(self.__collection_name, *args, **kwargs)
 
     def find_one_by_id(self, doc_id, *args, **kwargs):
-        with DbConnection(self.__name) as conn:
-            return conn.find_one({'_id': doc_id}, *args, **kwargs)
+        return self.__mongoOperationManager.find_one(self.__collection_name, {'_id': doc_id}, *args, **kwargs)
 
     def find_one(self, *args, **kwargs):
-        with DbConnection(self.__name) as conn:
-            return conn.find_one(*args, **kwargs)
+        return self.__mongoOperationManager.find_one(self.__collection_name, *args, **kwargs)
 
     def save(self, *args, **kwargs):
-        with DbConnection(self.__name) as conn:
-            return {'_id': conn.save(*args, **kwargs)}
+        return {'_id': self.__mongoOperationManager.save(self.__collection_name, *args, **kwargs)}
