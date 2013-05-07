@@ -4,6 +4,7 @@ Created on May 5, 2013
 @author: tosako
 '''
 
+
 class MongoOperationManager(object):
 
     def __init__(self, connection):

@@ -15,15 +15,15 @@ class BaseCollection(object):
         self.__collection_name = name
 
     def insert(self, *args, **kwargs):
-            doc_id = self.__mongoOperationManager.insert(self.__collection_name, *args, **kwargs)
-            # TODO: error check?
-            return {'_id': doc_id}
+        doc_id = self.__mongoOperationManager.insert(self.__collection_name, *args, **kwargs)
+        # TODO: error check?
+        return {'_id': doc_id}
 
     def remove_by_id(self, doc_id, *args, **kwargs):
         return self.__mongoOperationManager.remove(self.__collection_name, {'_id': doc_id}, *args, **kwargs)
 
     def remove(self, *args, **kwargs):
-        return self.__mongoOperationManager.remove(self.__collection_name,*args, **kwargs)
+        return self.__mongoOperationManager.remove(self.__collection_name, *args, **kwargs)
 
     def update_by_id(self, doc_id, doc, upsert=True, *args, **kwargs):
         result = self.__mongoOperationManager.update(self.__collection_name, {'_id': doc_id}, {'$set': doc}, upsert=upsert, *args, **kwargs)

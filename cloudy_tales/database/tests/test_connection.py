@@ -16,7 +16,6 @@ class TestConnection(UnitTestWithMongoDB):
         self.__connection = DbConnection('sunny')
         mongoManager = MongoOperationManager(self.__connection)
         self.__collection = BaseCollection(mongoManager, 'testCollection')
-        
 
     def tearDown(self):
         # Drop rows in collection
