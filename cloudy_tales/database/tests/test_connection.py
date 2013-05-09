@@ -5,7 +5,7 @@ Created on Apr 7, 2013
 '''
 import unittest
 from cloudy_tales.database.connection import DbConnection
-from cloudy_tales.database.tests.UniteTestWithMongoDB import UnitTestWithMongoDB
+from cloudy_tales.database.tests.UnitTestWithMongoDB import UnitTestWithMongoDB
 from cloudy_tales.database.MongoOperationManager import MongoOperationManager
 from cloudy_tales.database.collections.base import BaseCollection
 
