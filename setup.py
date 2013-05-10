@@ -1,5 +1,3 @@
-import os
-
 from setuptools import setup, find_packages
 
 requires = [
@@ -7,6 +5,7 @@ requires = [
     'zope.component',
     'zope.interface',
     'Ming',  # For unit test'
+    'pystache',
 ]
 
 setup(name='cloudy_tales',
