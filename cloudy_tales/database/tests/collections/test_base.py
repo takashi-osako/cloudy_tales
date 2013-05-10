@@ -4,19 +4,15 @@ Created on Apr 9, 2013
 @author: dorisip
 '''
 import unittest
-from cloudy_tales.database.tests.unittest_db_helper import create_in_memory_db_client
 from cloudy_tales.database.collections.base import BaseCollection
 from zope import component
 from cloudy_tales.database.client import IDbClient
 from cloudy_tales.database.connection import DbConnection
 from cloudy_tales.database.MongoOperationManager import MongoOperationManager
+from cloudy_tales.database.tests.UnitTestWithMongoDB import UnitTestWithMongoDB
 
 
-class TestBaseCollection(unittest.TestCase):
-
-    @staticmethod
-    def setUpClass():
-        create_in_memory_db_client()
+class TestBaseCollection(UnitTestWithMongoDB):
 
     def setUp(self):
         connection = DbConnection('sunny')
