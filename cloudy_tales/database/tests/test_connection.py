@@ -4,18 +4,16 @@ Created on Apr 7, 2013
 @author: dorisip
 '''
 import unittest
-from cloudy_tales.database.connection import DbConnection
 from cloudy_tales.database.tests.UnitTestWithMongoDB import UnitTestWithMongoDB
-from cloudy_tales.database.MongoOperationManager import MongoOperationManager
 from cloudy_tales.database.collections.base import BaseCollection
+from cloudy_tales.database.connectionManager import DbConnectionManager
 
 
 class TestConnection(UnitTestWithMongoDB):
 
     def setUp(self):
-        self.__connection = DbConnection('sunny')
-        mongoManager = MongoOperationManager(self.__connection)
-        self.__collection = BaseCollection(mongoManager, 'testCollection')
+        self.__connection = DbConnectionManager('sunny')
+        self.__collection = BaseCollection(self.__connection, 'testCollection')
 
     def tearDown(self):
         # Drop rows in collection

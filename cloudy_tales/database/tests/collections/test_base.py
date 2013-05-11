@@ -7,17 +7,15 @@ import unittest
 from cloudy_tales.database.collections.base import BaseCollection
 from zope import component
 from cloudy_tales.database.client import IDbClient
-from cloudy_tales.database.connection import DbConnection
-from cloudy_tales.database.MongoOperationManager import MongoOperationManager
 from cloudy_tales.database.tests.UnitTestWithMongoDB import UnitTestWithMongoDB
+from cloudy_tales.database.connectionManager import DbConnectionManager
 
 
 class TestBaseCollection(UnitTestWithMongoDB):
 
     def setUp(self):
-        connection = DbConnection('sunny')
-        operationManager = MongoOperationManager(connection)
-        self.__col = BaseCollection(operationManager, 'dummy')
+        connection = DbConnectionManager('sunny')
+        self.__col = BaseCollection(connection, 'dummy')
         # This is the direct in memory db connection, so we can execute mongo commands directly
         # without going through our own code to isolate testing
         self.__direct_conn = component.queryUtility(IDbClient).get_client()['sunny']['dummy']
@@ -121,7 +119,6 @@ class TestBaseCollection(UnitTestWithMongoDB):
     def test_save_with_no_id(self):
         doc = self.__col.save({'key': 'value'})
         self.assertIsNotNone(doc.get('_id'))
-
 
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']
