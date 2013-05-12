@@ -18,7 +18,7 @@ def generate_templated_json(template, data):
     return pystache.render(template, data)
 
 
-def combine_template_with_data(template, flat_id='3d5a7389-d53f-4fa4-9802-b6db893ccf1a', data_name='customer', write_to_file=True):
+def combine_template_with_data(template, flat_id='3d5a7389-d53f-4fa4-9802-b6db893ccf1a', data_name='Customer', write_to_file=True):
     '''
     Given template data, mustache it
     '''
