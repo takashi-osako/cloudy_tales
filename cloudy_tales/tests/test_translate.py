@@ -38,17 +38,12 @@ class TestTranslate(UnitTestWithMongoDB):
         self.assertEqual(results, 'bar is absent')
 
     def test_combine_template_with_data(self):
-        data_name = 'flower'
-        flat_id = '123'
         template = "Flower {{name}} is {{color}}"
-        with DbConnectionManager('windy') as connection:
-            # prepopulate test data
-            col = BaseCollection(connection, data_name)
-            data = {'_id': flat_id, 'metadata': {'color': 'red', 'name': 'rose'}}
-            col.save(data)
+        # prepopulate test data
+        data = {'color': 'red', 'name': 'rose'}
 
-            results = combine_template_with_data(template, flat_id, data_name, write_to_file=False)
-            self.assertEquals(results, 'Flower rose is red')
+        results = combine_template_with_data(template, data, write_to_file=False)
+        self.assertEquals(results, 'Flower rose is red')
 
 
 if __name__ == "__main__":
