@@ -27,3 +27,6 @@ class MIMClient:
 
     def get_client(self):
         return self.__client
+
+    def get_db_name(self):
+        return 'dummy_db'

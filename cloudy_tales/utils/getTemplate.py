@@ -10,7 +10,7 @@ from cloudy_tales.exceptions.templateNotFound import TemplateNotFound
 
 def get_template(tempalte_name):
     # get template
-    with DbConnectionManager('sunny') as connection:
+    with DbConnectionManager() as connection:
         template_colleciton = BaseCollection(connectionManager=connection, name='templates')
         template = template_colleciton.find_one({"name": tempalte_name})
     # Temporary template the flat file's data and save to /tmp/template.json

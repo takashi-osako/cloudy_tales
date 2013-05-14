@@ -10,9 +10,9 @@ from pymongo.mongo_client import MongoClient
 
 class DbConnectionManager(object):
 
-    def __init__(self, db_name):
+    def __init__(self):
         self.__client = component.queryUtility(IDbClient).get_client()
-        self.__db_name = db_name
+        self.__db_name = component.queryUtility(IDbClient).get_db_name()
 
     def __enter__(self):
         return self

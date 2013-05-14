@@ -12,12 +12,12 @@ from cloudy_tales.database.connectionManager import DbConnectionManager
 class TestConnection(UnitTestWithMongoDB):
 
     def setUp(self):
-        self.__connection = DbConnectionManager('sunny')
+        self.__connection = DbConnectionManager()
         self.__collection = BaseCollection(self.__connection, 'testCollection')
 
     def tearDown(self):
         # Drop rows in collection
-        self.__connection.get_client()['sunny']['testCollection'].remove()
+        self.__connection.get_client()['dummy_db']['testCollection'].remove()
 
     def test_get_client(self):
         client = self.__connection.get_client()
@@ -25,7 +25,7 @@ class TestConnection(UnitTestWithMongoDB):
 
     def test_get_db(self):
         db = self.__connection.get_db()
-        self.assertEquals(db.name, 'sunny')
+        self.assertEquals(db.name, 'dummy_db')
 
     def test_get_collection(self):
         col = self.__connection.get_collection('testCollection')

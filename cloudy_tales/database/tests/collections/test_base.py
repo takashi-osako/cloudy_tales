@@ -14,11 +14,11 @@ from cloudy_tales.database.connectionManager import DbConnectionManager
 class TestBaseCollection(UnitTestWithMongoDB):
 
     def setUp(self):
-        connection = DbConnectionManager('sunny')
+        connection = DbConnectionManager()
         self.__col = BaseCollection(connection, 'dummy')
         # This is the direct in memory db connection, so we can execute mongo commands directly
         # without going through our own code to isolate testing
-        self.__direct_conn = component.queryUtility(IDbClient).get_client()['sunny']['dummy']
+        self.__direct_conn = component.queryUtility(IDbClient).get_client()['dummy_db']['dummy']
 
     def tearDown(self):
         # Drop rows in collection
